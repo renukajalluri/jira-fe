@@ -1,0 +1,123 @@
+/* @import url("https://cdn.syncfusion.com/ej2/material.css"); */
+
+.createForms{
+  margin-bottom: 40px;
+ }
+.head {
+  margin-top: 10px;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  margin-left: -50px;
+  grid-template-columns: repeat(2, 40%);
+  gap: 40px;
+
+}
+
+.form-control label {
+  display: block;
+  color: rgb(71, 68, 68);
+  padding: 3px 0px;
+}
+
+.form-control {
+  width: 100%;
+  margin: 2px;
+  padding: 5px;
+  margin: 0px auto;
+}
+
+.form-control input {
+  width: 100%;
+
+  border: 0;
+  background-color: #F7F8FA;
+  height: 50px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.form-control select {
+  border: 0;
+  width: 100%;
+  background-color: #F7F8FA;
+  height: 50px;
+  border-radius: 5px;
+  outline: none;
+}
+
+.form-control input::placeholder {
+  color: #b8b7b7;
+  padding: 3px 16px;
+  text-align: start;
+  font-size: 13px;
+}
+
+
+
+.star {
+  color: red;
+}
+
+.error {
+  color: red;
+}
+
+.multiInput {
+  width: 500px;
+  max-width: 100%;
+  height: 52px;
+  border: 0px;
+  outline: none;
+}
+
+.date {
+  margin-top: 10px;
+  width: 500px;
+  height: 52px;
+}
+
+.dateInput {
+  width: 470px;
+  max-width: 100%;
+  height: 40px;
+  margin-top: 0.2rem;
+  background-color: #F7F8FA;
+  border: 0px;
+  padding-left: 0.9rem;
+  border-radius: 10px;
+  outline: none;
+}
+
+
+
+.pro-btn {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-left: 17rem;
+  gap: 50px;
+  margin-top: 3rem;
+  width: 528px;
+}
+
+.pro-btn .createBtn {
+  width: 260px;
+  height: 30px;
+  border: 0;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.pro-btn .resetBtn {
+  width: 260px;
+  height: 30px;
+  cursor: pointer;
+  background-color: white;
+}
