@@ -78,7 +78,7 @@ const RelatedIssueDetails = ({issueId,token})=>{
           {/* <Comment issueId={issueId} token={token}/> */}
           <div>
             Comments:
-            {issue.comments?issue.comments.map((comment)=>{return( <span><h4>{comment.text}</h4> <p style={{color:"grey",fontSize:"10px"}}>{comment.date_of_creation}</p></span> )
+            {issue.comments?issue.comments.map((comment)=>{return( <span key={comment._id}><h4>{comment.text}</h4> <p style={{color:"grey",fontSize:"10px"}}>{comment.date_of_creation}</p></span> )
            
             }):<p>No Comments</p>}
           </div>
