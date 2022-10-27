@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config";
-const baseUrl = "https://jira-be.herokuapp.com/issue/";
+const baseUrl = "https://jira-be.herokuapp.com/issue";
 // const baseUrl = `${config.getServerHost()}/issue`
 
 const updateIssue = async (id, dataObj, header) => {

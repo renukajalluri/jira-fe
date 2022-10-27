@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config";
-const baseUrl = "https://jira-be.herokuapp.com/comment/";
+const baseUrl = "https://jira-be.herokuapp.com/comment";
 // const baseUrl = `${config.getServerHost()}/comment`
 
 const addComment = async (dataObj, header) => {
