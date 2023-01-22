@@ -117,13 +117,13 @@ export default function LoginForm() {
           </div>
         </form>
         <div style={{ marginTop: "40px", textAlign: "center" }}>
-          <div style={{}}>For Manager Credintials:</div>
+          <div style={{}}>For developer Credintials:</div>
           <div style={{ marginLeft: "-6px" }}>email: test1@gmail.com</div>
           <div style={{ marginLeft: "-74px" }}>password: 123</div>
         </div>
 
         <div style={{ marginTop: "40px", textAlign: "center" }}>
-          <div style={{}}>For developer Credintials:</div>
+          <div style={{}}>For Manager Credintials:</div>
           <div style={{ marginLeft: "-6px" }}>email: demo1@gmail.com</div>
           <div style={{ marginLeft: "-74px" }}>password: 123</div>
         </div>
