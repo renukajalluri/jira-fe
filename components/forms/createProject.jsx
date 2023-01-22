@@ -1,40 +1,43 @@
-import projectService from '../../services/project'
-import userService from '../../services/user'
-import Backdrop from '@mui/material/Backdrop'
-import CircularProgress from '@mui/material/CircularProgress'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { useEffect, useState } from 'react'
-import DatePicker from 'react-datepicker'
-import classes from '../../styles/CreateProjectForm.module.css'
-import 'react-datepicker/dist/react-datepicker.css'
-import { MultiSelect } from 'react-multi-select-component'
-import { useRouter } from 'next/router'
+import projectService from "../../services/project";
+import userService from "../../services/user";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import classes from "../../styles/CreateProjectForm.module.css";
+import "react-datepicker/dist/react-datepicker.css";
+import { MultiSelect } from "react-multi-select-component";
+import { useRouter } from "next/router";
 
 const initialValues = {
-  projectName: '',
-  projectOwner: '',
-}
+  projectName: "",
+  projectOwner: "",
+};
 
 const validationSchema = Yup.object({
-  projectName: Yup.string().required('Project Name is required'),
-})
+  projectName: Yup.string().required("Project Name is required"),
+});
 
 const CreateProjectForm = ({ token }) => {
-  const router = useRouter()
-  const [owners, setOwners] = useState('[]')
-  const [name, setName] = useState('')
-  const [owner, setOwner] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [member, setMember] = useState('[]')
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
-  const [error, setError] = useState(false)
-  const [selected, setSelected] = useState([])
+  const router = useRouter();
+  const [owners, setOwners] = useState("[]");
+  const [name, setName] = useState("");
+  const [owner, setOwner] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [member, setMember] = useState("[]");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [error, setError] = useState(false);
+  const [selected, setSelected] = useState([]);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     try {
-      setLoading(false)
+      console.log(name, "name");
+      setLoading(false);
+
       const data = await projectService.createProject(
         {
           name: name,
@@ -45,83 +48,81 @@ const CreateProjectForm = ({ token }) => {
         },
         {
           headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-type': 'Application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
             Authorization: token,
           },
-        },
-      )
-      resetData()
-      setLoading(true)
-      router.push('/dashboard/projectBoard')
+        }
+      );
+      // resetData();
+      // setLoading(true);
+      router.push("/dashboard/projectBoard");
+      setLoading(false);
     } catch (e) {
-      resetData()
-      console.log(e)
+      // resetData();
+      console.log(e);
     }
-  }
+  };
 
- 
   useEffect(() => {
     async function getData(token) {
       try {
         const users = await userService.getUsers({
           headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-type': 'Application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
             Authorization: token,
           },
-        })
-        // console.log("users",users)
+        });
         if (!users) {
-          setLoading(false)
-          return
+          setLoading(false);
+          return;
         }
         const members = users.filter(function (user) {
-          return user.job_role == 'developer'
-        })
+          return user.job_role == "developer";
+        });
 
-        setMember(JSON.stringify(members))
+        setMember(JSON.stringify(members));
 
-        // console.log("members",members)
         const owners = users.filter(function (user) {
-          return user.job_role == 'manager'
-        })
-        setOwners(JSON.stringify(owners))
-        
-        setLoading(true)
+          return user.job_role == "manager";
+        });
+        setOwners(JSON.stringify(owners));
+
+        setLoading(true);
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
 
-    getData(token)
-  }, [])
- 
+    getData(token);
+  }, []);
+
   const assignee = JSON.parse(member).map((m) => {
-    return { value: m._id, label: m.name }
-  })
-  
+    return { value: m._id, label: m.name };
+  });
+
   const resetForm = () => {
-    formik.resetForm()
-    setStartDate('')
-    setEndDate('')
-    setError(false)
-    setSelected([])
-    setMember('[]')
-    setOwner(null)
-  }
+    formik.resetForm();
+    setStartDate("");
+    setEndDate("");
+    setError(false);
+    setSelected([]);
+    setMember("[]");
+    setOwner(null);
+  };
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
     resetForm,
-  })
+  });
   if (!loading) {
     return (
       <Backdrop open>
         <CircularProgress color="inherit" />
       </Backdrop>
-    )
+    );
   } else {
     return (
       <div>
@@ -129,29 +130,32 @@ const CreateProjectForm = ({ token }) => {
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <div className={classes.grid}>
             {/* project name */}
-            <div className={classes['form-control']}>
+            <div className={classes["form-control"]}>
               <label htmlFor="projectName">Project Name</label>
               <input
                 name="projectName"
                 type="text"
                 placeholder="Project Name"
-                onChange={formik.handleChange}
-                value={formik.values.projectName}
-                onBlur={formik.handleBlur}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                // onChange={formik.handleChange}
+                value={name}
+                // onBlur={formik.handleBlur}
               />
-              {formik.touched.projectName && formik.errors.projectName ? (
+              {/* {formik.touched.projectName && formik.errors.projectName ? (
                 <p className={classes.error}>{formik.errors.projectName}</p>
-              ) : null}
+              ) : null} */}
             </div>
 
             {/* project owner */}
-            <div className={classes['form-control']}>
+            <div className={classes["form-control"]}>
               <label htmlFor="projectOwner">Project Owner</label>
               <select
                 name="projectOwner"
                 onChange={(e) => {
-                  e.preventDefault()
-                  setOwner(e.target.value)
+                  e.preventDefault();
+                  setOwner(e.target.value);
                 }}
                 value={owner}
                 required="true"
@@ -166,7 +170,7 @@ const CreateProjectForm = ({ token }) => {
                     >
                       {value.name}
                     </option>
-                  )
+                  );
                 })}
               </select>
             </div>
@@ -190,7 +194,7 @@ const CreateProjectForm = ({ token }) => {
                 name="startDate"
               />
 
-              {error ? <p className={classes.error}>Required</p> : ''}
+              {error ? <p className={classes.error}>Required</p> : ""}
             </div>
 
             {/* end date */}
@@ -231,7 +235,7 @@ const CreateProjectForm = ({ token }) => {
                   onChange={setSelected}
                   className={classes.multiInput}
                   onRemove={(event) => {
-                    console.log(event)
+                    console.log(event);
                   }}
                 />
               </div>
@@ -239,7 +243,7 @@ const CreateProjectForm = ({ token }) => {
 
             <div></div>
 
-            <div className={classes['pro-btn']}>
+            <div className={classes["pro-btn"]}>
               <button
                 onClick={resetForm}
                 className={classes.resetBtn}
@@ -248,8 +252,9 @@ const CreateProjectForm = ({ token }) => {
                 Reset
               </button>
               <button
-                disabled={!formik.isValid || formik.isSubmitting}
-                onSubmit={onSubmit}
+                // disabled={!formik.isValid || formik.isSubmitting}
+                // onSubmit={onSubmit}
+                onClick={onSubmit}
                 className={classes.createBtn}
                 type="submit"
               >
@@ -259,8 +264,8 @@ const CreateProjectForm = ({ token }) => {
           </div>
         </form>
       </div>
-    )
+    );
   }
-}
+};
 
-export default CreateProjectForm
+export default CreateProjectForm;

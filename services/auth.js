@@ -1,7 +1,7 @@
 import axios from "axios";
 import config from "../config";
 // const baseUrl = `${config.getServerHost()}/auth`
-const baseUrl = "https://jira-be.herokuapp.com/auth";
+const baseUrl = "https://jira-be.vercel.app/auth";
 
 const login = async (credentials) => {
   const response = await axios.post(`${baseUrl}/login`, credentials);

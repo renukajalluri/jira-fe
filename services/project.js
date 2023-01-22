@@ -1,10 +1,9 @@
 import axios from "axios";
 import config from "../config";
-const baseUrl = "https://jira-be.herokuapp.com/project";
+const baseUrl = "https://jira-be.vercel.app/project";
 // const baseUrl = `${config.getServerHost()}/project`
 
 const createProject = async (dataObj, header) => {
-  console.log(dataObj, header);
   const response = await axios.post(baseUrl, dataObj, header);
   return response.data;
 };

@@ -1,37 +1,35 @@
-import { faSquarePlus } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import classes from '../../styles/issueDetails.module.css'
-import { useEffect, useState } from 'react'
-import commentService from '../../services/comment'
+import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classes from "../../styles/issueDetails.module.css";
+import { useEffect, useState } from "react";
+import commentService from "../../services/comment";
 // import styles from "../../styles/CreateProjectForm.module.css"
-import Backdrop from '@mui/material/Backdrop'
-import CircularProgress from '@mui/material/CircularProgress'
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Comment = ({ issueId, token }) => {
-  // console.log(issueId)
-  const [load, setLoad] = useState(true)
-  const [text, setText] = useState(null)
-  const [comments, setComments] = useState(null)
+  const [load, setLoad] = useState(true);
+  const [text, setText] = useState(null);
+  const [comments, setComments] = useState(null);
   const getComments = async () => {
     try {
       const res = await commentService.getComments(issueId, {
         headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-type': 'Application/json',
+          "Access-Control-Allow-Origin": "*",
+          "Content-type": "Application/json",
           Authorization: token,
         },
-      })
-      // console.log('comments',res)
+      });
 
-      setComments(res)
-      setLoad(false)
+      setComments(res);
+      setLoad(false);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
   const addComment = async () => {
-    setText('')
-    setLoad(true)
+    setText("");
+    setLoad(true);
     try {
       const res = await commentService.addComment(
         {
@@ -40,25 +38,24 @@ const Comment = ({ issueId, token }) => {
         },
         {
           headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-type': 'Application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
             Authorization: token,
           },
-        },
-      )
-      // console.log('comments',res)
-      getComments()
-      setLoad(false)
+        }
+      );
+      getComments();
+      setLoad(false);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
     if (issueId) {
-      getComments()
+      getComments();
     }
-  }, [])
+  }, []);
   return (
     <>
       {load ? (
@@ -68,7 +65,6 @@ const Comment = ({ issueId, token }) => {
       ) : (
         <div className={classes.comment}>
           <h3>Comments </h3>
-          {/* <span onClick={()=>{console.log("clicked")}} ><FontAwesomeIcon icon={faSquarePlus} />  Add Comment</span> */}
           <div>
             <p>
               <label htmlFor="w3review">Write a comment:</label>
@@ -94,13 +90,13 @@ const Comment = ({ issueId, token }) => {
                       <p>Added by {comment.user.name}</p>
                     </div>
                   </div>
-                )
+                );
               })
             : null}
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Comment
+export default Comment;

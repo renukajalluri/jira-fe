@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config";
-const baseUrl = "https://jira-be.herokuapp.com/issue";
+const baseUrl = "https://jira-be.vercel.app/issue";
 // const baseUrl = `${config.getServerHost()}/issue`
 
 const updateIssue = async (id, dataObj, header) => {
@@ -13,7 +13,6 @@ const createIssue = async (dataObj, header) => {
 };
 
 const getIssueById = async (id, header) => {
-  // console.log(id)
   const url = `${baseUrl}/${id}`;
   const response = await axios.get(url, header);
   return response.data;
@@ -27,7 +26,6 @@ const getIssuesByProjectId = async (projectId, headers) => {
 
 const getRelatedIssuesByIssueId = async (issueId, headers) => {
   const url = `${baseUrl}/related-issues/${issueId}`;
-  console.log("url", url);
   const response = await axios.get(url, headers);
   return response.data;
 };
