@@ -100,25 +100,33 @@ export default function LoginForm() {
                   <p>Forgot Password?</p>
               </div> */}
           <div className={classes.btn}>
-            {
-              loading ? (
-                <Backdrop className={classes.backdrop} open>
-                  <CircularProgress color="inherit" />
-                </Backdrop>
-              ) : (
-                //    <div >
-                <button
-                  disabled={!formik.isValid || formik.isSubmitting}
-                  onSubmit={onSubmit}
-                  type="submit"
-                >
-                  Login
-                </button>
-              )
-              //    </div>
-            }
+            {loading ? (
+              <Backdrop className={classes.backdrop} open>
+                <CircularProgress color="inherit" />
+              </Backdrop>
+            ) : (
+              //    <div >
+              <button
+                disabled={!formik.isValid || formik.isSubmitting}
+                onSubmit={onSubmit}
+                type="submit"
+              >
+                Login
+              </button>
+            )}
           </div>
         </form>
+        <div style={{ marginTop: "40px", textAlign: "center" }}>
+          <div style={{}}>For Manager Credintials:</div>
+          <div style={{ marginLeft: "-6px" }}>email: test1@gmail.com</div>
+          <div style={{ marginLeft: "-74px" }}>password: 123</div>
+        </div>
+
+        <div style={{ marginTop: "40px", textAlign: "center" }}>
+          <div style={{}}>For developer Credintials:</div>
+          <div style={{ marginLeft: "-6px" }}>email: demo@gmail.com</div>
+          <div style={{ marginLeft: "-74px" }}>password: 123</div>
+        </div>
       </div>
     </div>
   );
