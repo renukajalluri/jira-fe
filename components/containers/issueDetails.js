@@ -85,13 +85,13 @@ export default function ProjectDetails({ issueId, token, user }) {
         </div>
         <div>
           <div className={classes.right}>
-            {puser.job_role == "manager" ? (
+            {/* {puser.job_role == "manager" ? (
               ""
             ) : (
               <Link href={`/dashboard/projectBoard/relatedIssues/${issue._id}`}>
                 <a>Related Issues</a>
               </Link>
-            )}
+            )} */}
             {issue.status == "completed" ? (
               ""
             ) : creater ? (
