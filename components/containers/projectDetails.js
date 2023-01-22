@@ -180,9 +180,9 @@ export default function ProjectDetails({ projectId, token }) {
                 id="priority"
               >
                 <option value="">Select</option>
-                <option vlaue="low">low</option>
-                <option vlaue="medium">medium</option>
-                <option vlaue="high">high</option>
+                <option value="low">low</option>
+                <option value="medium">medium</option>
+                <option value="high">high</option>
               </select>
               <label className={classes.label} htmlFor="priority">
                 Filter Priority
